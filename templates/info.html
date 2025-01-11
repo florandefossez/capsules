@@ -1,0 +1,31 @@
+{% extends 'body.html' %}
+
+{% block body %}
+
+  <div class="info">
+    <img src="{{ url_for('images', id=cap.id) }}">
+    <div class="table">
+      <div class="row"><span class="label">Identifiant</span><span class="value">{{ cap.id }}</span></div>
+      <div class="row"><span class="label">Titre</span><span class="value">{{ cap.title }}</span></div>
+      <div class="row"><span class="label">Référence</span><span class="value">{{ cap.reference }}</span></div>
+      <div class="row"><span class="label">Maison</span><span class="value">{{ brand.name }}</span></div>
+      <div class="row"><span class="label">Text dessus</span><span class="value">{{ cap.text_top }}</span></div>
+      <div class="row"><span class="label">Couleur</span><span class="value">{% if cap.background_color is number %}{{ colors[cap.background_color]["name"] }}{% endif %}</span></div>
+      <div class="row"><span class="label">Couleur text</span><span class="value">{% if cap.text_color is number %}{{ colors[cap.text_color]["name"] }}{% endif %}</span></div>
+      <div class="row"><span class="label">Text côté</span><span class="value">{{ cap.text_aside }}</span></div>
+      <div class="row"><span class="label">Couleur côté</span><span class="value">{% if cap.aside_color is number %}{{ colors[cap.aside_color]["name"] }}{% endif %}</span></div>
+      <div class="row"><span class="label">Couleur text côté</span><span class="value">{% if cap.text_aside_color is number %}{{ colors[cap.text_aside_color]["name"] }}{% endif %}</span></div>
+      <div class="row"><span class="label">Diamètre</span><span class="value">{{ diameters[cap.diameter]["name"] }}</span></div>
+      <div class="row"><span class="label">Date d'ajout</span><span class="value">{{ cap.date_created }}</span></div>
+    </div>
+  </div>
+
+  <div class="buttons">
+    <a href="{{ url_for('edit', id=cap.id) }}"><button>MODIFIER</button></a>
+    <form action="{{ url_for('edit', id=cap.id) }}" method="POST">
+      <input type="hidden" name="type" value="delete_capsule">
+      <button type="submit">SUPPRIMER</button>
+    </form>
+  </div>
+
+{% endblock %}

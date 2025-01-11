@@ -1,0 +1,37 @@
+{% extends 'body.html' %}
+
+{% block body %}
+
+  {% if brand %}
+  <div class="brand_desc">
+    <h2>{{ brand.name }}</h2>
+    <p>{{brand.description}}</p>
+  </div>
+  {% endif %}
+
+  <div class="capsules">
+    {% for cap in caps.items %}
+    <a href="{{ url_for('info', id=cap.id) }}">
+      <div class="capsule">
+        <img src="{{ url_for('images', id=cap.id) }}">
+        <span>{{ cap.title }}</span>
+      </div>
+    </a>
+    {% endfor %}
+  </div>
+
+  <div class="page">
+    {% if caps.page > 1 %}
+    <a href="{{ url_prev }}"><div class="button active"><</div></a>
+    {% else %}
+    <div class="button inactive"><</div>
+    {% endif %}
+    <div>{{ caps.page }} / {{ caps.pages }}</div>
+    {% if caps.page < caps.pages %}
+    <a href="{{ url_next }}"><div class="button active">></div></a>
+    {% else %}
+    <div class="button inactive">></div>
+    {% endif %}
+  </div>
+
+{% endblock %}

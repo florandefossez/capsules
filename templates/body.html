@@ -1,0 +1,22 @@
+{% extends 'base.html' %}
+
+{% block base %}
+
+<header>
+    <a href="{{ url_for('index') }}"><div>Acceil</div></a>
+    <a href="{{ url_for('search') }}"><div>Recherche</div></a>
+    <a href="{{ url_for('brand') }}"><div>Maison</div></a>
+    <a href="{{ url_for('edit') }}"><div>Ajouter</div></a>
+</header>
+
+<body>
+    <div class="content">
+        <div class="inner-content">
+            {% block body %}{% endblock %}
+        </div>
+    </div>
+</body>
+<footer>
+
+</footer>
+{% endblock %}

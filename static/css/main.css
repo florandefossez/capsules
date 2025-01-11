@@ -1,0 +1,205 @@
+:root {
+    --main-bg-color: #fffffff0;
+}
+
+body, html {
+    margin: 0;
+    font-family: sans-serif;
+    background-image: url("/static/images/back.jpg");
+}
+
+header {
+    display: flex;
+    flex-direction: row;
+    justify-content: center;
+    gap: 20px;
+    width: 100%;
+    background-color: var(--main-bg-color);
+    padding: 10px 0;
+    margin-bottom: 30px;
+}
+
+header div {
+    width: 90px;
+    display: block;
+    padding: 5px;
+    text-align: center;
+    border-radius: 5px;
+}
+
+div.content {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+}
+
+a {
+    text-decoration: none;
+    color: black;
+}
+
+h1 {
+    align-self: center;
+}
+
+h2 {
+    margin: 0;
+    margin-bottom: 0.5em;
+}
+
+
+button {
+    min-width: 8em;
+    min-height: 2em;
+    cursor: pointer;
+    border: solid black 1px;
+    border-radius: 5px;
+}
+
+footer {
+    height: 5em;
+}
+
+div.inner-content {
+    display: flex;
+    flex-wrap: wrap;
+    justify-content: center;
+    align-items: center;
+    flex-direction: column;
+    background-color: var(--main-bg-color);
+    width: 65%;
+    margin-top: 30px;
+    border-radius: 5px;
+    padding: 30px;
+    gap: 30px;
+}
+
+/* ================ index ================ */
+
+div.capsules {
+    display: flex;
+    flex-wrap: wrap;
+    justify-content: center;
+    gap: 30px;
+}
+
+div.brand_desc {
+    width: 65%;
+    text-align: justify;
+}
+
+div.capsule {
+    display: flex;
+    flex-direction: column;
+    place-items: center;
+    text-align: center;
+    font-size: 15px;
+    border-radius: 5px;
+    padding: 15px 15px 5px 15px;
+    gap: 15px;
+    width: 100px;
+    height: 160px;
+}
+
+div.capsule img {
+    height: 100px;
+    width: 100px;
+    border-radius: 50%;
+}
+
+div.page {
+    display: flex;
+    justify-content: space-evenly;
+    width: 65%;
+    align-items: center;
+}
+
+div.page div.button {
+    border: solid black 1px;
+    border-radius: 5px;
+    height: 1.5em;
+    width: 1.5em;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+}
+
+div.page div.inactive, div.capsule, button, div.button, header div, div.brands div {
+    background-color: white;
+}
+
+div.page div.active:hover, div.capsule:hover, header div:hover, button:hover {
+    background-color: rgb(230, 230, 230);
+}
+
+/* ================ info ================ */
+
+div.info {
+    display: flex;
+    flex-direction: row;
+    justify-content: center;
+    gap: 40px;
+    flex-wrap: wrap;
+    margin-top: 2em;
+    width: 100%;
+}
+
+div.info img {
+    height: 400px;
+    width: 400px;
+    border-radius: 50%;
+}
+
+div.table {
+    display: flex;
+    flex-direction: column;
+    width: 45%;
+}
+
+div.row:first-child {
+    border: none;
+}
+
+div.row {
+    border-top: 1px solid black;
+    display: flex;
+    padding: 5px;
+}
+
+div.row *.label {
+    font-weight: bold;
+    width: 50%;
+}
+
+div.buttons {
+    display: flex;
+    gap: 2em;
+    margin-top: 2em;
+    justify-content: center;
+}
+
+
+
+/* ================ brands ================ */
+
+
+div.brands {
+    display: flex;
+    flex-direction: row;
+    flex-wrap: wrap;
+    justify-content: center;
+    /* width: 75%; */
+    gap: 20px;
+}
+
+div.brands div {
+    text-align: left;
+    font-size: 15px;
+    min-width: 200px;
+    border-radius: 5px;
+    padding: 15px;
+}
+
+div.brands a:hover {
+    text-decoration: underline;
+}

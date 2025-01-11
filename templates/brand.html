@@ -1,0 +1,16 @@
+{% extends 'body.html' %}
+
+{% block body %}
+
+  <div class="brands">
+    {% for letter in data %}
+    <div>
+      <h2>{{ letter }}</h2>
+      {% for brand in data[letter] %}
+      <a href="{{ url_for('index', brand_name=brand.name) }}"><span>{{ brand.name }}</span></a><br>
+      {% endfor %}
+    </div>
+    {% endfor %}
+  </div>
+
+{% endblock %}

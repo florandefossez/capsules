@@ -1,0 +1,83 @@
+{% extends 'body.html' %}
+
+{% block body %}
+
+  <div class="info">
+    {% if values %}<img src="{{ url_for('images', id=values['id']) }}">{% endif %}
+
+    <div class="table">
+      {% if values %}
+      <h1>Modifier une capsule</h1>
+      <form action="{{ url_for('edit', id=values['id']) }}" method="POST">
+        <input type="hidden" name="type" value="update_capsule">
+      {% else %}
+      <h1>Ajouter une capsule</h1>
+      <form action="{{ url_for('edit') }}" method="POST">
+        <input type="hidden" name="type" value="create_capsule">
+      {% endif %}
+
+        {% for text_input in [("reference", "Référence"), ("brand_name", "Maison"), ("text_top", "Text dessus"), ("text_aside", "Text côté")] %}
+        <div class="row">
+          <label class="label" for="{{ text_input[0] }}">{{ text_input[1] }}</label>
+          <input type="text" id="{{ text_input[0] }}" name="{{ text_input[0] }}" value="{{ values.get(text_input[0], '') }}">
+        </div>
+        {% endfor %}
+
+        {% for color_input in [("background_color", "Couleur"), ("aside_color", "Couleur côté"), ("text_color", "Couleur text"), ("text_aside_color", "Couleur text côté")] %}
+        <div class="row">
+          <label class="label" for="{{ color_input[0] }}">{{ color_input[1] }}</label>
+          <select id="{{ color_input[0] }}" name="{{ color_input[0] }}">
+            <option value="">-</option>
+            {% for color in colors %}
+            <option value="{{ loop.index0 }}" {% if loop.index0 == values.get(color_input[0], -1) %}selected{% endif %}>
+              {{color['name'] }}
+            </option>
+            {% endfor %}
+          </select>
+        </div>
+        {% endfor %}
+
+        <div class="row">
+          <label class="label" for="diameter">Diamètre</label>
+          <select id="diameter" name="diameter">
+            {% for diameter in diameters %}
+            <option value="{{ loop.index0 }}" {% if loop.index0==values.get('diameter', 3) %}selected{% endif %}>{{
+              diameter['name'] }}</option>
+            {% endfor %}
+          </select>
+        </div>
+        <!--
+          ADD in form: enctype=multipart/form-data 
+          <label for="image">Select a file:</label>
+          <input type="file" id="image" name="image">
+        -->
+        <div class="buttons">
+          <button type="submit">AJOUTER</button>
+        </div>
+      </form>
+    </div>
+  </div>
+
+  {% if not values %}
+
+  <div class="table">
+    <h1>Ajouter une maison</h1>
+    <form action="{{ url_for('edit') }}" method="POST">
+      <input type="hidden" name="type" value="create_brand">
+      <div class="row">
+        <label class="label" for="name">Nom</label>
+        <input type="text" id="name" name="name" autocomplete="off">
+      </div>
+      <div class="row">
+        <label class="label" for="description">Description</label>
+        <input type="text" id="description" name="description" autocomplete="off">
+      </div>
+      <div class="buttons">
+        <button type="submit">AJOUTER</button>
+      </div>
+    </form>
+  </div>
+
+  {% endif %}
+
+{% endblock %}

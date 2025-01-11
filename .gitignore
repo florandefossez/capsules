@@ -1,0 +1,6 @@
+env
+__pycache__
+instance/
+config.json
+*.ipynb
+capsules.sock
