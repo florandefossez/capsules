@@ -6,6 +6,7 @@ body, html {
     margin: 0;
     font-family: sans-serif;
     background-image: url("/static/images/back.jpg");
+    background-size: cover;
 }
 
 header {
@@ -47,7 +48,6 @@ h2 {
     margin: 0;
     margin-bottom: 0.5em;
 }
-
 
 button {
     min-width: 8em;
@@ -152,9 +152,7 @@ div.info img {
 }
 
 div.table {
-    display: flex;
-    flex-direction: column;
-    width: 45%;
+    width: 400px;
 }
 
 div.row:first-child {
@@ -165,10 +163,15 @@ div.row {
     border-top: 1px solid black;
     display: flex;
     padding: 5px;
+    gap: 5em;
 }
 
 div.row *.label {
     font-weight: bold;
+    width: 50%;
+}
+
+div.row *.value {
     width: 50%;
 }
 
@@ -179,10 +182,7 @@ div.buttons {
     justify-content: center;
 }
 
-
-
 /* ================ brands ================ */
-
 
 div.brands {
     display: flex;

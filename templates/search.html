@@ -10,14 +10,14 @@
         {% for text_input in [("reference", "Référence"), ("brand_name", "Maison"), ("text_top", "Text dessus"), ("text_aside", "Text côté")] %}
         <div class="row">
           <label class="label" for="{{ text_input[0] }}">{{ text_input[1] }}</label>
-          <input type="text" id="{{ text_input[0] }}" name="{{ text_input[0] }}">
+          <input type="text" id="{{ text_input[0] }}" name="{{ text_input[0] }}" class="value">
         </div>
         {% endfor %}
 
         {% for color_input in [("background_color", "Couleur"), ("aside_color", "Couleur côté"), ("text_color", "Couleur text"), ("text_aside_color", "Couleur text côté")] %}
         <div class="row">
           <label class="label" for="{{ color_input[0] }}">{{ color_input[1] }}</label>
-          <select id="{{ color_input[0] }}" name="{{ color_input[0] }}">
+          <select id="{{ color_input[0] }}" name="{{ color_input[0] }}" class="value">
             <option value="">-</option>
             {% for color in colors %}
             <option value="{{ loop.index0 }}">{{ color['name'] }}</option>
@@ -28,7 +28,7 @@
 
         <div class="row">
           <label class="label" for="diameter">Diamètre</label>
-          <select id="diameter" name="diameter">
+          <select id="diameter" name="diameter" class="value">
             <option value="">-</option>
             {% for diameter in diameters %}
             <option value="{{ loop.index0 }}">{{ diameter['name'] }}</option>

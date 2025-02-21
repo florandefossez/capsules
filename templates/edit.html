@@ -16,17 +16,17 @@
         <input type="hidden" name="type" value="create_capsule">
       {% endif %}
 
-        {% for text_input in [("reference", "Référence"), ("brand_name", "Maison"), ("text_top", "Text dessus"), ("text_aside", "Text côté")] %}
+        {% for text_input in [("title", "Titre"), ("reference", "Référence"), ("brand_name", "Maison"), ("text_top", "Text dessus"), ("text_aside", "Text côté")] %}
         <div class="row">
           <label class="label" for="{{ text_input[0] }}">{{ text_input[1] }}</label>
-          <input type="text" id="{{ text_input[0] }}" name="{{ text_input[0] }}" value="{{ values.get(text_input[0], '') }}">
+          <input class="value" type="text" id="{{ text_input[0] }}" name="{{ text_input[0] }}" value="{{ values.get(text_input[0], '') }}">
         </div>
         {% endfor %}
 
         {% for color_input in [("background_color", "Couleur"), ("aside_color", "Couleur côté"), ("text_color", "Couleur text"), ("text_aside_color", "Couleur text côté")] %}
         <div class="row">
           <label class="label" for="{{ color_input[0] }}">{{ color_input[1] }}</label>
-          <select id="{{ color_input[0] }}" name="{{ color_input[0] }}">
+          <select class="value" id="{{ color_input[0] }}" name="{{ color_input[0] }}">
             <option value="">-</option>
             {% for color in colors %}
             <option value="{{ loop.index0 }}" {% if loop.index0 == values.get(color_input[0], -1) %}selected{% endif %}>
@@ -39,7 +39,7 @@
 
         <div class="row">
           <label class="label" for="diameter">Diamètre</label>
-          <select id="diameter" name="diameter">
+          <select class="value" id="diameter" name="diameter">
             {% for diameter in diameters %}
             <option value="{{ loop.index0 }}" {% if loop.index0==values.get('diameter', 3) %}selected{% endif %}>{{
               diameter['name'] }}</option>
