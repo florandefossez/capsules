@@ -23,7 +23,7 @@
         </div>
         {% endfor %}
 
-        {% for color_input in [("background_color", "Couleur"), ("aside_color", "Couleur côté"), ("text_color", "Couleur text"), ("text_aside_color", "Couleur text côté")] %}
+        {% for color_input in [("background_color", "Couleur"), ("aside_color", "Couleur contour"), ("text_color", "Couleur text"), ("text_aside_color", "Couleur text contour")] %}
         <div class="row">
           <label class="label" for="{{ color_input[0] }}">{{ color_input[1] }}</label>
           <select class="value" id="{{ color_input[0] }}" name="{{ color_input[0] }}">

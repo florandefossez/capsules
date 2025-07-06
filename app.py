@@ -19,6 +19,13 @@ db = SQLAlchemy(app, model_class=Base)
 bcrypt = Bcrypt(app)
 
 
+def split_reference(full_ref: str) -> tuple[int, str]:
+    i = 0
+    while i < len(full_ref) and full_ref[i].isdigit():
+        i += 1
+    return int(full_ref[:i]),full_ref[i:]
+
+
 ##==============================================
 ##                  LOGIN
 ##==============================================
@@ -100,7 +107,8 @@ Diameters = [
 class Capsule(db.Model):
     id: Mapped[int] = mapped_column(primary_key=True)
     title: Mapped[str] = mapped_column(nullable=False)
-    reference: Mapped[str]
+    reference: Mapped[int]
+    sub_reference: Mapped[str]
     brand: Mapped[int]
     date_created: Mapped[str] = mapped_column(nullable=False, default=datetime.now().strftime("%d-%m-%y"))
     text_top: Mapped[str]
@@ -154,7 +162,8 @@ def index():
         if brand:
             query = query.filter(Capsule.brand == brand.id)
     if reference:
-        query = query.filter(Capsule.reference == reference)
+        ref, sub_ref = split_reference(reference)
+        query = query.filter(Capsule.reference == ref, Capsule.sub_reference == sub_ref)
     if text_top:
         query = query.filter(Capsule.text_top.ilike(f"%{text_top}%"))
     if text_aside:
@@ -170,7 +179,7 @@ def index():
     if diameter is not None:
         query = query.filter(Capsule.diameter == diameter)
 
-    query = query.order_by(Brand.name, Capsule.reference)
+    query = query.order_by(Brand.name, Capsule.reference, Capsule.sub_reference)
     caps = query.paginate(page=page, per_page=48)
 
     args = request.args.copy()
@@ -186,6 +195,7 @@ def index():
 def info(id):
     cap = Capsule.query.get_or_404(id)
     brand = Brand.query.get_or_404(cap.brand)
+    cap.reference = f"{cap.reference}{cap.sub_reference}"
     return render_template("info.html", cap=cap, brand=brand, colors=Colors, diameters=Diameters)
 
 
@@ -223,6 +233,7 @@ def edit():
             brand = Brand.query.get_or_404(cap.brand).name
             values = cap.__dict__
             values["brand_name"] = brand
+            values["reference"] = f"{cap.reference}{cap.sub_reference}"
             return render_template("edit.html", colors=Colors, diameters=Diameters, values=values)
 
     elif request.form["type"] == "delete_capsule":
@@ -231,14 +242,14 @@ def edit():
         db.session.commit()
 
     elif request.form["type"] in ["update_capsule", "create_capsule"]:
-        brand = Brand.query.filter_by(name=request.form["brand_name"]).first_or_404()
+        brand = Brand.query.filter_by(name=request.form["brand_name"]).first_or_404("brand not found")
         if request.form["type"] == "update_capsule":
             cap = Capsule.query.get_or_404(cap_id)
         else:
             cap = Capsule()
             db.session.add(cap)
         cap.title = request.form["title"]
-        cap.reference = request.form["reference"]
+        cap.reference, cap.sub_reference = split_reference(request.form["reference"])
         cap.brand = brand.id
         cap.text_top = request.form["text_top"]
         cap.text_aside = request.form["text_aside"]
@@ -253,7 +264,7 @@ def edit():
 
     elif request.form["type"] == "create_brand":
         brand = Brand(
-            name = request.form["name"],
+            name = request.form["name"].strip(),
             description =  request.form["description"]
         )
         db.session.add(brand)
