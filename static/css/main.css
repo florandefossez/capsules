@@ -26,6 +26,7 @@ header div {
     padding: 5px;
     text-align: center;
     border-radius: 5px;
+    border: solid black 1px;
 }
 
 div.content {

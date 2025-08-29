@@ -13,7 +13,7 @@
     {% for cap in caps.items %}
     <a href="{{ url_for('info', id=cap.id) }}">
       <div class="capsule">
-        <img src="{{ url_for('images', id=cap.id) }}">
+        <img src="https://florandefossez.com/assets/capsules128x128/{{ cap.id }}.jpg">
         <span>{{ cap.title }}</span>
       </div>
     </a>
